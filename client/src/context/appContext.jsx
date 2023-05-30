@@ -1,68 +1,37 @@
-import React, { useReducer, useContext, useEffect } from 'react';
-
-import reducer from './reducer';
-import axios from 'axios';
-import {
-  DISPLAY_ALERT,
-  CLEAR_ALERT,
-  SETUP_USER_BEGIN,
-  SETUP_USER_SUCCESS,
-  SETUP_USER_ERROR,
-  TOGGLE_SIDEBAR,
-  LOGOUT_USER,
-  UPDATE_USER_BEGIN,
-  UPDATE_USER_SUCCESS,
-  UPDATE_USER_ERROR,
-  HANDLE_CHANGE,
-  CLEAR_VALUES,
-  CREATE_JOB_BEGIN,
-  CREATE_JOB_SUCCESS,
-  CREATE_JOB_ERROR,
-  GET_JOBS_BEGIN,
-  GET_JOBS_SUCCESS,
-  SET_EDIT_JOB,
-  DELETE_JOB_BEGIN,
-  DELETE_JOB_ERROR,
-  EDIT_JOB_BEGIN,
-  EDIT_JOB_SUCCESS,
-  EDIT_JOB_ERROR,
-  SHOW_STATS_BEGIN,
-  SHOW_STATS_SUCCESS,
-  CLEAR_FILTERS,
-  CHANGE_PAGE,
-  GET_CURRENT_USER_BEGIN,
-  GET_CURRENT_USER_SUCCESS,
-} from './actions';
+import { DISPLAY_ALERT, CLEAR_ALERT, SETUP_USER_BEGIN, SETUP_USER_SUCCESS, SETUP_USER_ERROR, TOGGLE_SIDEBAR, LOGOUT_USER, UPDATE_USER_BEGIN, UPDATE_USER_SUCCESS, UPDATE_USER_ERROR, HANDLE_CHANGE, CLEAR_VALUES, CREATE_JOB_BEGIN, CREATE_JOB_SUCCESS, CREATE_JOB_ERROR, GET_JOBS_BEGIN, GET_JOBS_SUCCESS, SET_EDIT_JOB, DELETE_JOB_BEGIN, DELETE_JOB_ERROR, EDIT_JOB_BEGIN, EDIT_JOB_SUCCESS, EDIT_JOB_ERROR, SHOW_STATS_BEGIN, SHOW_STATS_SUCCESS, CLEAR_FILTERS, CHANGE_PAGE, GET_CURRENT_USER_BEGIN, GET_CURRENT_USER_SUCCESS } from "./actions";
+import React, { useReducer, useContext, useEffect } from "react";
+import reducer from "./reducer";
+import axios from "axios";
 
 const initialState = {
   userLoading: true,
   isLoading: false,
   showAlert: false,
-  alertText: '',
-  alertType: '',
+  alertText: "",
+  alertType: "",
   user: null,
-  userLocation: '',
+  userLocation: "",
   showSidebar: false,
   isEditing: false,
-  editJobId: '',
-  position: '',
-  company: '',
-  jobLocation: '',
-  jobTypeOptions: ['full-time', 'part-time', 'remote', 'internship'],
-  jobType: 'full-time',
-  statusOptions: ['interview', 'declined', 'pending'],
-  status: 'pending',
+  editJobId: "",
+  position: "",
+  company: "",
+  jobLocation: "",
+  jobTypeOptions: ["full-time", "part-time", "remote", "internship"],
+  jobType: "full-time",
+  statusOptions: ["interview", "declined", "pending"],
+  status: "pending",
   jobs: [],
   totalJobs: 0,
   numOfPages: 1,
   page: 1,
   stats: {},
   monthlyApplications: [],
-  search: '',
-  searchStatus: 'all',
-  searchType: 'all',
-  sort: 'latest',
-  sortOptions: ['latest', 'oldest', 'a-z', 'z-a'],
+  search: "",
+  searchStatus: "all",
+  searchType: "all",
+  sort: "latest",
+  sortOptions: ["latest", "oldest", "a-z", "z-a"],
 };
 
 const AppContext = React.createContext();
@@ -72,7 +41,7 @@ const AppProvider = ({ children }) => {
 
   // axios
   const authFetch = axios.create({
-    baseURL: '/api/v1',
+    baseURL: "/api/v1",
   });
   // request
 
@@ -88,7 +57,7 @@ const AppProvider = ({ children }) => {
         logoutUser();
       }
       return Promise.reject(error);
-    }
+    },
   );
 
   const displayAlert = () => {
@@ -105,10 +74,7 @@ const AppProvider = ({ children }) => {
   const setupUser = async ({ currentUser, endPoint, alertText }) => {
     dispatch({ type: SETUP_USER_BEGIN });
     try {
-      const { data } = await axios.post(
-        `/api/v1/auth/${endPoint}`,
-        currentUser
-      );
+      const { data } = await axios.post(`/api/v1/auth/${endPoint}`, currentUser);
 
       const { user, location } = data;
       dispatch({
@@ -128,13 +94,13 @@ const AppProvider = ({ children }) => {
   };
 
   const logoutUser = async () => {
-    await authFetch.get('/auth/logout');
+    await authFetch.get("/auth/logout");
     dispatch({ type: LOGOUT_USER });
   };
   const updateUser = async (currentUser) => {
     dispatch({ type: UPDATE_USER_BEGIN });
     try {
-      const { data } = await authFetch.patch('/auth/updateUser', currentUser);
+      const { data } = await authFetch.patch("/auth/updateUser", currentUser);
       const { user, location } = data;
 
       dispatch({
@@ -162,7 +128,7 @@ const AppProvider = ({ children }) => {
     dispatch({ type: CREATE_JOB_BEGIN });
     try {
       const { position, company, jobLocation, jobType, status } = state;
-      await authFetch.post('/jobs', {
+      await authFetch.post("/jobs", {
         position,
         company,
         jobLocation,
@@ -249,7 +215,7 @@ const AppProvider = ({ children }) => {
   const showStats = async () => {
     dispatch({ type: SHOW_STATS_BEGIN });
     try {
-      const { data } = await authFetch('/jobs/stats');
+      const { data } = await authFetch("/jobs/stats");
       dispatch({
         type: SHOW_STATS_SUCCESS,
         payload: {
@@ -272,7 +238,7 @@ const AppProvider = ({ children }) => {
   const getCurrentUser = async () => {
     dispatch({ type: GET_CURRENT_USER_BEGIN });
     try {
-      const { data } = await authFetch('/auth/getCurrentUser');
+      const { data } = await authFetch("/auth/getCurrentUser");
       const { user, location } = data;
 
       dispatch({
@@ -307,8 +273,7 @@ const AppProvider = ({ children }) => {
         showStats,
         clearFilters,
         changePage,
-      }}
-    >
+      }}>
       {children}
     </AppContext.Provider>
   );
