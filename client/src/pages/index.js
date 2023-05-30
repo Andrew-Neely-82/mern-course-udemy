@@ -1,5 +1,4 @@
-import Landing from './Landing'
-import Error from './Error'
-import Register from './Register'
-import ProtectedRoute from './ProtectedRoute'
-export { Landing, Error, Register, ProtectedRoute }
+export { default as Landing } from "./landing/Landing";
+export { default as Error } from "./error/Error";
+export { default as Register } from "./register/Register";
+export { default as ProtectedRoute } from "./protectedRoute/ProtectedRoute";

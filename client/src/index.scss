@@ -1,0 +1,181 @@
+@import "./scss/defaults";
+@import "./scss/mixins";
+@import "./scss/variables";
+@import "./scss/functions";
+
+/* fonts */
+@import url("https://fonts.googleapis.com/css2?family=Cabin&family=Roboto+Condensed:wght@400;700&display=swap");
+
+small,
+.text-small {
+  font-size: map($fonts, small-text);
+}
+
+.img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+/* buttons */
+
+.btn {
+  @include btn();
+
+  &:hover {
+    background: map($primary, 700);
+    box-shadow: map($shadow, 3);
+  }
+}
+
+.btn-hipster {
+  color: map($primary, 500);
+  background: map($primary, 200);
+
+  &:hover {
+    color: map($primary, 200);
+    background: map($primary, 700);
+  }
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn-hero {
+  font-size: 1.25rem;
+  padding: 0.5rem 1.25rem;
+}
+
+.btn-danger {
+  @extend .alert-danger;
+
+  &:hover {
+    background: map($colors, red-dark);
+    color: map($colors, white);
+  }
+}
+
+/* alerts */
+.alert {
+  @include alert();
+}
+
+.alert-danger {
+  color: map($colors, red-dark);
+  background: map($colors, red-light);
+}
+
+.alert-success {
+  color: map($colors, green-dark);
+  background: map($colors, green-light);
+}
+
+/* form */
+.form {
+  @include form();
+
+  &:hover {
+    box-shadow: map($shadow, 4);
+  }
+}
+
+.form-label {
+  @include formLabel();
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  @include formComps();
+}
+
+.form-input,
+.form-select,
+.btn-block {
+  height: 35px;
+}
+.form-row {
+  margin-bottom: 1rem;
+}
+
+.form-textarea {
+  height: 7rem;
+}
+
+.form-alert {
+  color: map($colors, red-dark);
+  letter-spacing: var(--letterSpacing);
+  text-transform: capitalize;
+}
+/* alert */
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading {
+  @include loading();
+  animation: spinner 2s linear infinite;
+}
+
+.loading-center {
+  margin: 0 auto;
+}
+
+/* title */
+
+.title {
+  text-align: center;
+}
+
+.title-underline {
+  background: map($primary, 500);
+  width: 7rem;
+  height: 0.25rem;
+  margin: 0 auto;
+  margin-top: -1rem;
+}
+
+.container {
+  width: var(--fluid-width);
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.full-page {
+  min-height: 100vh;
+}
+
+.coffee-info {
+  text-align: center;
+  text-transform: capitalize;
+  margin-bottom: 1rem;
+  letter-spacing: var(--letterSpacing);
+}
+
+.coffee-info {
+  span {
+    display: block;
+  }
+}
+
+.coffee-info {
+  a {
+    color: map($primary, 500);
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .coffee-info {
+    text-align: left;
+  }
+
+  .coffee-info {
+    span {
+      display: inline-block;
+      margin-right: 0.5rem;
+    }
+  }
+}
