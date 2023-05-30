@@ -1,26 +1,12 @@
-import Alert from './Alert'
-import BigSidebar from './BigSidebar'
-import ChartsContainer from './ChartsContainer'
-import FormRow from './FormRow'
-import FormRowSelect from './FormRowSelect'
-import JobsContainer from './JobsContainer'
-import Loading from './Loading'
-import Logo from './Logo'
-import Navbar from './Navbar'
-import SearchContainer from './SearchContainer'
-import SmallSidebar from './SmallSidebar'
-import StatsContainer from './StatsContainer'
-export {
-  Logo,
-  FormRow,
-  Alert,
-  Navbar,
-  BigSidebar,
-  SmallSidebar,
-  FormRowSelect,
-  SearchContainer,
-  JobsContainer,
-  StatsContainer,
-  ChartsContainer,
-  Loading,
-}
+export { default as Alert } from "./Alert";
+export { default as BigSidebar } from "./BigSidebar";
+export { default as ChartsContainer } from "./ChartsContainer";
+export { default as FormRow } from "./FormRow";
+export { default as FormRowSelect } from "./FormRowSelect";
+export { default as JobsContainer } from "./JobsContainer";
+export { default as Loading } from "./Loading";
+export { default as Logo } from "./Logo";
+export { default as Navbar } from "./Navbar";
+export { default as SearchContainer } from "./SearchContainer";
+export { default as SmallSidebar } from "./SmallSidebar";
+export { default as StatsContainer } from "./StatsContainer";
